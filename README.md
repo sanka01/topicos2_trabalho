@@ -6,25 +6,25 @@ Link GIT: https://github.com/sanka01/topicos2_trabalho
 # Requisitos funcionais
 
 ## * Administrador
-###RF01 - Cadastrar administrador
-###RF02 - Editar administrador
-###RF03 - Excluir administrador
-###RF04 - Cadastrar livros
-###RF05 - Editar livros
-###RF06 - Excluir livros
-###RF07 - Cadastrar categorias
-###RF08 - Editar categorias
-###RF09 - Excluir categorias
-##* Cliente
-###RF10 - Auto cadastrar cliente
-###RF11 - Auto editar cliente
-###RF12 - Auto excluir cliente
-###RF13 - Cadastrar forma de pagamento
-###RF14 - Editar forma de pagamento
-###RF15 - Excluir pagamento
-###RF16 - Comprar livros
-###RF17 - Alugar livros
-###RF18 - Adquirir assinatura para aluguel de livros
+### RF01 - Cadastrar administrador
+### RF02 - Editar administrador
+### RF03 - Excluir administrador
+### RF04 - Cadastrar livros
+### RF05 - Editar livros
+### RF06 - Excluir livros
+### RF07 - Cadastrar categorias
+### RF08 - Editar categorias
+### RF09 - Excluir categorias
+## * Cliente
+### RF10 - Auto cadastrar cliente
+### RF11 - Auto editar cliente
+### RF12 - Auto excluir cliente
+### RF13 - Cadastrar forma de pagamento
+### RF14 - Editar forma de pagamento
+### RF15 - Excluir pagamento
+### RF16 - Comprar livros
+### RF17 - Alugar livros
+### RF18 - Adquirir assinatura para aluguel de livros
 
 ## Telas Planejadas
 ##### CRUD cadastro
