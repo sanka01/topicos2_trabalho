@@ -9,8 +9,6 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import org.eclipse.jdt.internal.compiler.ExtraFlags;
-
 import factory.JPAFactory;
 import model.Usuario;
 
