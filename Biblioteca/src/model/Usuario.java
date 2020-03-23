@@ -10,17 +10,16 @@ import javax.persistence.TemporalType;
 @Entity
 public class Usuario extends DefaultEntity<Usuario> {
 
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3392515925930356965L;
+	private static final long serialVersionUID = 8808841694013495869L;
 
 	@Column(length = 100, nullable = false)
 	private String nome;
 
-	@Column(length = 20, nullable = false)
-	private String matricula;
+	@Column(length = 14, nullable = false)
+	private String cpf;
+
+	@Column(length = 30, nullable = false)
+	private String senha;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -28,14 +27,6 @@ public class Usuario extends DefaultEntity<Usuario> {
 
 	@Column(length = 120)
 	private String email;
-
-	public String getMatricula() {
-		return matricula;
-	}
-
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
 
 	public Date getDataAniversario() {
 		return dataAniversario;
@@ -60,4 +51,21 @@ public class Usuario extends DefaultEntity<Usuario> {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 }
