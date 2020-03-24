@@ -9,8 +9,10 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import application.Util;
 import factory.JPAFactory;
 import model.Usuario;
+import org.apache.commons.codec.digest.DigestUtils;
 
 @Named
 @ViewScoped
@@ -52,11 +54,9 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 		return entity;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	@Override
+	public void salvar() {
+		getEntity().setSenha(Util.hashSHA256(getEntity().getSenha()));
+		super.salvar();
 	}
 }
