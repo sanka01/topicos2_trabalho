@@ -22,7 +22,7 @@ public class Usuario extends DefaultEntity<Usuario> {
 	@Column(length = 14, nullable = false)
 	private String cpf;
 
-	@Column(length = 30, nullable = false)
+	@Column(length = 256, nullable = false)
 	private String senha;
 
 	@Column(nullable = false)
