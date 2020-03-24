@@ -1,35 +1,33 @@
 package controller;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import factory.JPAFactory;
+import model.Usuario;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import factory.JPAFactory;
-import model.Usuario;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Named
 @ViewScoped
-public class UsuarioController extends Controller<Usuario> implements Serializable {
+public class LoginController extends Controller<Usuario> implements Serializable {
 
 	private static final long serialVersionUID = 5133323995601528105L;
 
-	private Usuario usuario;
 
 	private String filtro;
 	
 	private List<Usuario> listaUsuario;
-
-	public void pesquisar() {
-		EntityManager em = JPAFactory.getEntityManager();
-		Query query = em.createQuery("Select a " + "From Usuario a " + "Where upper(a.nome) like upper(:filtro)");
-		query.setParameter("filtro", "%" + getFiltro() + "%");
-		listaUsuario = query.getResultList();
-	}
+//
+//	public void pesquisar() {
+//		EntityManager em = JPAFactory.getEntityManager();
+//		Query query = em.createQuery("Select a " + "From Usuario a " + "Where upper(a.nome) like upper(:filtro)");
+//		query.setParameter("filtro", "%" + getFiltro() + "%");
+//		listaUsuario = query.getResultList();
+//	}
 
 	public String getFiltro() {
 		return filtro;
@@ -44,6 +42,9 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 			listaUsuario = new ArrayList<Usuario>();
 		return listaUsuario;
 	}
+	public void entrar(){
+
+	}
 
 	@Override
 	public Usuario getEntity() {
@@ -52,11 +53,4 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 		return entity;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
 }

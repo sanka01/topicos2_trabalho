@@ -15,6 +15,9 @@ public class Usuario extends DefaultEntity<Usuario> {
 	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@Column(length = 100, nullable = false)
+	private String login;
+
 	@Column(length = 14, nullable = false)
 	private String cpf;
 
@@ -68,4 +71,11 @@ public class Usuario extends DefaultEntity<Usuario> {
 		this.senha = senha;
 	}
 
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
 }
