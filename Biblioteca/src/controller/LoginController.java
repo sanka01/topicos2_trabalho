@@ -7,6 +7,9 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import application.Util;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,17 +20,25 @@ public class LoginController extends Controller<Usuario> implements Serializable
 
 	private static final long serialVersionUID = 5133323995601528105L;
 
-
 	private String filtro;
-	
-	private List<Usuario> listaUsuario;
-//
-//	public void pesquisar() {
-//		EntityManager em = JPAFactory.getEntityManager();
-//		Query query = em.createQuery("Select a " + "From Usuario a " + "Where upper(a.nome) like upper(:filtro)");
-//		query.setParameter("filtro", "%" + getFiltro() + "%");
-//		listaUsuario = query.getResultList();
-//	}
+
+	private Usuario usuario;
+
+	public void entrar() {
+		String senha = Util.hashSHA256(usuario.getSenha());
+
+		System.out.println(senha);
+
+		EntityManager em = JPAFactory.getEntityManager();
+		Query query = em.createQuery("Select a " + "From Usuario a " + "Where a.cpf AND a.senha like upper(:filtro)");
+		query.setParameter("filtro", "%" + getFiltro() + "%");
+		usuario = (Usuario) query.getSingleResult();
+
+		if (usuario != null)
+			Util.redirect("Biblioteca/faces/usuario.xhtml");
+		else
+			Util.addMessageError("Erro");
+	}
 
 	public String getFiltro() {
 		return filtro;
@@ -37,14 +48,17 @@ public class LoginController extends Controller<Usuario> implements Serializable
 		this.filtro = filtro;
 	}
 
-	public List<Usuario> getListaUsuario() {
-		if (listaUsuario == null)
-			listaUsuario = new ArrayList<Usuario>();
-		return listaUsuario;
+	public Usuario getUsuario() {
+		if (usuario == null)
+			usuario = new Usuario();
+		return usuario;
 	}
-	public void entrar(){
 
-	}
+	/*
+	 * public void entrar() {
+	 * 
+	 * }
+	 */
 
 	@Override
 	public Usuario getEntity() {
