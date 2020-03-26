@@ -7,6 +7,7 @@ import java.util.List;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import application.Util;
@@ -23,7 +24,7 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 	private Usuario usuario;
 
 	private String filtro;
-	
+
 	private List<Usuario> listaUsuario;
 
 	public void pesquisar() {
@@ -56,7 +57,20 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 
 	@Override
 	public void salvar() {
-		getEntity().setSenha(Util.hashSHA256(getEntity().getSenha()));
-		super.salvar();
+		EntityManager em = JPAFactory.getEntityManager();
+		Query query = em.createQuery("Select a " + "From Usuario a " + "Where a.cpf = :cpf");
+		query.setParameter("cpf", getEntity().getCpf());
+		try {
+			usuario = (Usuario) query.getSingleResult();
+
+		} catch (NoResultException e) {
+			usuario = null;
+		}
+
+		if (usuario == null) {
+			getEntity().setSenha(Util.hashSHA256(getEntity().getSenha()));
+			super.salvar();
+		} else
+			Util.addMessageError("CPF já cadastrado");
 	}
 }

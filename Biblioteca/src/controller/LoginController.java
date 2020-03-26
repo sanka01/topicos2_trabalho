@@ -1,7 +1,6 @@
 package controller;
 
-import factory.JPAFactory;
-import model.Usuario;
+import java.io.Serializable;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -9,11 +8,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import application.Session;
 import application.Util;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import factory.JPAFactory;
+import model.Usuario;
 
 @Named
 @ViewScoped
@@ -40,8 +38,9 @@ public class LoginController extends Controller<Usuario> implements Serializable
             entity = null;
         }
 
-        if (entity != null)
-            Util.redirect("usuario.xhtml");
+        if (entity != null) {
+//        	Session.getInstance().setAttribute("usuarioLogado", entity);
+            Util.redirect("usuario.xhtml");}
         else
             Util.addMessageError("Erro");
     }
@@ -53,13 +52,6 @@ public class LoginController extends Controller<Usuario> implements Serializable
     public void setFiltro(String filtro) {
         this.filtro = filtro;
     }
-
-
-    /*
-     * public void entrar() {
-     *
-     * }
-     */
 
     @Override
     public Usuario getEntity() {
