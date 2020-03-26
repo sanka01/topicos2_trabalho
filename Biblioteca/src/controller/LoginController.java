@@ -27,7 +27,7 @@ public class LoginController extends Controller<Usuario> implements Serializable
     public void entrar() {
         String senha = Util.hashSHA256(getEntity().getSenha());
 
-        System.out.println(senha);
+//        System.out.println(senha);
 
         EntityManager em = JPAFactory.getEntityManager();
         Query query = em.createQuery("Select a " + "From Usuario a " + "Where a.cpf = :cpf AND a.senha = :senha");

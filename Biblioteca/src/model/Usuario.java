@@ -2,10 +2,14 @@ package model;
 
 import java.util.Date;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.br.CPF;
+
 
 @Entity
 public class Usuario extends DefaultEntity<Usuario> {
@@ -15,6 +19,7 @@ public class Usuario extends DefaultEntity<Usuario> {
 	@Column(length = 100, nullable = false)
 	private String nome;
 
+	@CPF(message = "CPF inválido")
 	@Column(length = 14, nullable = false)
 	private String cpf;
 
