@@ -6,6 +6,7 @@ import model.Usuario;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import application.Util;
@@ -18,53 +19,53 @@ import java.util.List;
 @ViewScoped
 public class LoginController extends Controller<Usuario> implements Serializable {
 
-	private static final long serialVersionUID = 5133323995601528105L;
+    private static final long serialVersionUID = 5133323995601528105L;
 
-	private String filtro;
+    private String filtro;
 
-	private Usuario usuario;
 
-	public void entrar() {
-		String senha = Util.hashSHA256(usuario.getSenha());
+    public void entrar() {
+        String senha = Util.hashSHA256(getEntity().getSenha());
 
-		System.out.println(senha);
+        System.out.println(senha);
 
-		EntityManager em = JPAFactory.getEntityManager();
-		Query query = em.createQuery("Select a " + "From Usuario a " + "Where a.cpf AND a.senha like upper(:filtro)");
-		query.setParameter("filtro", "%" + getFiltro() + "%");
-		usuario = (Usuario) query.getSingleResult();
+        EntityManager em = JPAFactory.getEntityManager();
+        Query query = em.createQuery("Select a " + "From Usuario a " + "Where a.cpf = :cpf AND a.senha = :senha");
+        query.setParameter("senha", senha);
+        query.setParameter("cpf", getEntity().getCpf());
+        try {
+            entity = (Usuario) query.getSingleResult();
 
-		if (usuario != null)
-			Util.redirect("Biblioteca/faces/usuario.xhtml");
-		else
-			Util.addMessageError("Erro");
-	}
+        } catch (NoResultException e) {
+            entity = null;
+        }
 
-	public String getFiltro() {
-		return filtro;
-	}
+        if (entity != null)
+            Util.redirect("usuario.xhtml");
+        else
+            Util.addMessageError("Erro");
+    }
 
-	public void setFiltro(String filtro) {
-		this.filtro = filtro;
-	}
+    public String getFiltro() {
+        return filtro;
+    }
 
-	public Usuario getUsuario() {
-		if (usuario == null)
-			usuario = new Usuario();
-		return usuario;
-	}
+    public void setFiltro(String filtro) {
+        this.filtro = filtro;
+    }
 
-	/*
-	 * public void entrar() {
-	 * 
-	 * }
-	 */
 
-	@Override
-	public Usuario getEntity() {
-		if (entity == null)
-			entity = new Usuario();
-		return entity;
-	}
+    /*
+     * public void entrar() {
+     *
+     * }
+     */
+
+    @Override
+    public Usuario getEntity() {
+        if (entity == null)
+            entity = new Usuario();
+        return entity;
+    }
 
 }
